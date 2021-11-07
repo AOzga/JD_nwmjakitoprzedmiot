@@ -142,7 +142,7 @@ print(np.sum(t2 == nowa_t2))  # zlicza ile elementów jest takich samych
 ob_d.save(
     "obraz_zapisany.bmp")  # jako argument podajemy nazwę pliku wraz z rozszerzeniem, bo w zależności od tego w jakim formacie zapiszemy otrzymamy różne tablice obrazu
 
-input()
+#input()
 """
 
 # programowanie tablic
@@ -190,7 +190,7 @@ def compute_ramka(w, h, dzielnik=8):
     potrzymaj_h = h
     potrzymaj_w = w
     flip = True
-    for i in range(int(w/grubosc_ramki)):
+    for i in range(int(w / grubosc_ramki)):
         print(f"iterating on {i=}, gdzie {grubosc_ramki=}")
         z1 = potrzymaj_h - grubosc_ramki
         z1s = grubosc_ramki + h - potrzymaj_h
@@ -202,11 +202,12 @@ def compute_ramka(w, h, dzielnik=8):
         potrzymaj_w -= grubosc_ramki * 2
     return tab * 255
 
+
 # TODO: Sprwadz logike, bo cos mi tu nie gra, w sensie te min(w,h)/2 to sraka i strasznie gruba ta linia wychodzi
 # TODO: W sensie, w przykladzie jest podany dzielnik 8, co da grubosc 100, czyli z obrazka 800x800,
 # TODO:  wpierdala 200 pixeli na iteracje czarnego, przez co tylko dwie czarne iteracje są i powstaje okropna kropa na srodku.
 
-#to sobie odkomentuj, powinno dzialac z bomby.
+# to sobie odkomentuj, powinno dzialac z bomby.
 '''
 Pokazywanie ramki w ramce :V logika na flipa,
  mozna jeszcze funkcją matematyczną wyciąć białe z czarnego,
@@ -216,21 +217,21 @@ Pokazywanie ramki w ramce :V logika na flipa,
  sprawdze jeszcze poza pociągiem, bo troche rozskupienie
 '''
 
-#Image.fromarray(compute_ramka(1440,200,8)).show()
+
+# Image.fromarray(compute_ramka(1440,200,8)).show()
 
 
-
-def compute_kreseczki(w,h,dzielnik = 8):
-    grubosc_kreski = int(w/dzielnik)
-    tab = np.zeros((h,w),dtype="uint8")
+def compute_kreseczki(w, h, dzielnik=8):
+    grubosc_kreski = int(w / dzielnik)
+    tab = np.zeros((h, w), dtype="uint8")
     flip = False
-    for i in range(int(w/grubosc_kreski)):
-        tab[0:h, i*grubosc_kreski:w] = int(flip)
+    for i in range(int(w / grubosc_kreski)):
+        tab[0:h, i * grubosc_kreski:w] = int(flip)
         flip = not flip
     return tab * 255
 
-#Image.fromarray(compute_kreseczki(1440,900,16)).show()
 
+# Image.fromarray(compute_kreseczki(1440,900,16)).show()
 
 
 # TODO: To samo co wyzej, jak chcesz to Ci opisze o co cho, ale pewnie trzeba fine-tuning tego gowna zrobic, bo na kolanie w pociagu pisane XD
@@ -244,27 +245,23 @@ Ogolnie jak lubisz elektronike, to polecam  apollo 440 - the future's what it us
                                             infected mushroom - the messanger 2012
                                             XD
 '''
-#podejscie manualne
-def compute_pointcross(w,h,x,y):
-    tab = np.zeros((h,w),dtype = "uint8")
-    #color q1 top left
-    tab[0:y , 0:x] = 1
-    #color q2 top right
-    tab[0:y, x:w] = 0
-    #color q3 bot left
-    tab[y:h, 0:x] = 0
-    #color q4 bot right
-    tab[y:h, x:w] = 1
-    return tab * 255
-#podejscie skalowalne
-def scalable_compute_pointcross(w,h,x,y):
-    tab = np.zeros((h,w),dtype="uint8")
-    for i in range(2):
-        for j in range(2):
-            #tab[] = 1
-            print(tab)
 
+
+# podejscie manualne
+def compute_pointcross(w, h, x, y):
+    tab = np.zeros((h, w), dtype="uint8")
+    # color q1 top left
+    tab[0:y, 0:x] = 0
+    # color q2 top right
+    tab[0:y, x:w] = 1
+    # color q3 bot left
+    tab[y:h, 0:x] = 1
+    # color q4 bot right
+    tab[y:h, x:w] = 0
     return tab * 255
 
-#Image.fromarray(scalable_compute_pointcross(150,150,70,70)).show()
-Image.fromarray(compute_pointcross(150,150,70,70)).show()
+# Image.fromarray(compute_pointcross(150,150,95,95)).show()
+
+
+
+
